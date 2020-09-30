@@ -1,0 +1,27 @@
+from math import factorial
+
+digits = ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0']
+# digits = ['2', '1', '0']
+perms = [[digits[0]]]
+
+
+def insert_digit(prev_perms, i, j, group_number):
+  current_digit = digits[i]
+  group_size = int(len(prev_perms)/factorial(j))
+
+
+for i in range(1, len(digits)):
+  temp_perms = []
+  for perm in perms[-1]:
+    temp_perms.append(digits[i] + perm)
+
+  for perm in perms[-1]:
+    for j in range(1, len(perm)+1):
+      temp_perms.append(perm[:j] + digits[i] + perm[j:])
+
+  perms.append(temp_perms)
+
+print(perms[-1])
+print(perms[-1][1000000])
+
+print('wow')
