@@ -4,55 +4,42 @@ from math import sqrt
 # 2. find all their sums
 # 3. subtract from total sum
 
-def abundant(n):
-    divisors = [1]
-    if n < 1:
-        return False
-    for i in range(2, int(sqrt(n)+1)):
-        if n == i**2:
-            divisors.append(int(sqrt(n)))
-        elif n % i == 0:
+
+def get_proper_factors(n):
+    divisors = []
+    for i in range(1, 1 + int(sqrt(n))):
+        if n % i == 0:
             divisors.append(i)
-            divisors.append(int(n/i))
-    if sum(divisors) > n:
-        return 'abun'
-    if sum(divisors) == n:
-        return 'perf'
-    else:
-        return False
+            if i != int(n/i):
+                divisors.append(int(n/i))
+    divisors.remove(n)
+    return divisors
+
+
+def is_abundant(n):
+    divisors = get_proper_factors(n)
+    return n < sum(divisors)
+
 
 abundants = []
-perfects = []
-
 for i in range(28123):
-    if abundant(i) == 'abun':
-        abundants.append(i)
-    if abundant(i) == 'perf':
-        perfects.append(i)
+    if is_abundant(i+1):
+        abundants.append(i+1)
 
-abundant_sums = []
-print(len(abundants))
+length = len(abundants)
+sums = {}
+for i in range(28123):
+    sums[str(i+1)] = False
 
-pos=0
-for i in abundants:
-    if i > 28123/2:
+for a in range(length):
+    if abundants[a] > 28123/2:
         break
-    pos += 1
+    for b in range(a, length):
+        sums[str(abundants[a] + abundants[b])] = True
 
-# for i in range(len(abundants)):
-#     print('========\nNew start at', i, '!!\n===========')
-#     m = abundants[i]
-#     for j in abundants[i:]:
-#         if m+j < 28123:
-#             if abundant_sums.count(m+j) == 0:
-#                 abundant_sums.append(m+j)
-#                 print(i, m,j,m+j)
-#         else:
-#             print('BREAK')
-#             break
-#
-# sum = int((28123*28122) / 2) - sum(abundant_sums)
-#
-# print(sum)
-print(abundants)
-print(perfects)
+sum = 0
+for key in sums:
+    if not sums[key]:
+        sum += int(key)
+
+print(sum)
