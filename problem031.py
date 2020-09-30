@@ -10,7 +10,7 @@ coins = [2,5,10,20,50,100,200]
 methods = [[]]
 
 for n in range(1,201):
-    # print('NEW:', n)
+    print('NEW:', n)
     current_methods = []
     for coin in coins:
         if coin == n:
@@ -24,7 +24,7 @@ for n in range(1,201):
                     current_methods.append(new_meth)
     methods.append(current_methods)
 
-# print(len(methods[-1]))
+print(len(methods[-1]))
 
 sum = 1     # 200 1p coins
 
@@ -32,6 +32,9 @@ for method in methods:
     sum += len(method)
 
 print(sum)
+
+
+# Someone else's solution, much simpler (but slower hehe)
 
 # total = 1
 # for a in range(0,201,1):
