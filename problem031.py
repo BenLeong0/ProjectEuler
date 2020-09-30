@@ -29,7 +29,6 @@ print(len(methods[-1]))
 sum = 1     # 200 1p coins
 
 for method in methods:
-    print(method)
     sum += len(method)
 
 print(sum)
