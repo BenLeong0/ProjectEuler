@@ -6,8 +6,6 @@ from problem065values import *
 #        [8, 5, 9, 3]
 #        ]
 
-i = 2
-
 ans = val[0]
 
 for i in range(1, len(val)):
